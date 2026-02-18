@@ -6,10 +6,17 @@ function CartItem() {
   const cart = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  const total = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
+  const calculateTotal = () => {
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  };
+
+  const decreaseQty = (item) => {
+    if (item.quantity === 1) {
+      dispatch(removeItem(item.id));
+    } else {
+      dispatch(updateQuantity({ id: item.id, quantity: item.quantity - 1 }));
+    }
+  };
 
   return (
     <div style={{ padding: "20px" }}>
@@ -18,43 +25,26 @@ function CartItem() {
       {cart.map((item) => (
         <div key={item.id}>
           <h3>{item.name}</h3>
-          <p>Price: ${item.price}</p>
+          <p>${item.price}</p>
 
-          <button
-            onClick={() =>
-              dispatch(
-                updateQuantity({
-                  id: item.id,
-                  quantity: item.quantity + 1
-                })
-              )
-            }
-          >
+          <button onClick={() => decreaseQty(item)}>-</button>
+          <span>{item.quantity}</span>
+          <button onClick={() =>
+            dispatch(updateQuantity({ id: item.id, quantity: item.quantity + 1 }))
+          }>
             +
           </button>
 
-          <span>{item.quantity}</span>
-
-          <button
-            onClick={() =>
-              dispatch(
-                updateQuantity({
-                  id: item.id,
-                  quantity: item.quantity - 1
-                })
-              )
-            }
-          >
-            -
-          </button>
-
           <button onClick={() => dispatch(removeItem(item.id))}>
-            Remove
+            Delete
           </button>
         </div>
       ))}
 
-      <h3>Total: ${total}</h3>
+      <h3>Total Amount: ${calculateTotal()}</h3>
+
+      <button>Checkout</button>
+      <button>Continue Shopping</button>
     </div>
   );
 }
