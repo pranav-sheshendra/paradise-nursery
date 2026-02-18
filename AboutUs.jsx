@@ -2,21 +2,22 @@ import React from "react";
 
 function AboutUs() {
   return (
-    <div style={{ padding: "20px" }}>
+    <div className="about-us-container">
       <h1>About Paradise Nursery</h1>
 
       <p>
-        Paradise Nursery is dedicated to providing beautiful and healthy plants
-        for homes and workplaces. We focus on promoting greenery and sustainable living.
+        Paradise Nursery is an online plant shop that provides a wide
+        collection of indoor and decorative plants.
       </p>
 
       <p>
-        Our collection includes indoor plants, decorative plants, and low maintenance plants
-        suitable for beginners and plant enthusiasts.
+        Our mission is to encourage people to bring greenery into their
+        homes and promote sustainable living.
       </p>
 
       <p>
-        Our mission is to bring nature closer to people and encourage environmental awareness.
+        This project demonstrates React UI development and Redux state
+        management for shopping cart functionality.
       </p>
     </div>
   );
